@@ -1,28 +1,18 @@
-name: Python Lint
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+name: Python CI
+on: [push]
 
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
+    - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
-
-    - name: Install flake8
-      run: |
-        pip install flake8
-
-    - name: Run flake8
-      run: |
-        flake8 .
+        python-version: '3.12'
+    - name: Install dependencies
+      run: pip install flake8 pytest
+    - name: Lint with flake8
+      run: flake8 . --count --show-source --statistics
+    - name: Run tests
+      run: pytest
