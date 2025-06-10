@@ -15,4 +15,10 @@ jobs:
     - name: Lint with flake8
       run: flake8 . --count --show-source --statistics
     - name: Run tests
-      run: pytest
+      run: |
+        cd /home/runner/work/my-python-project/my-python-project
+        echo "Directory structure:"
+        ls -R
+        echo "Test discovery:"
+        pytest --collect-only -v
+        pytest tests/  # Explicit test directory
