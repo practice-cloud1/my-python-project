@@ -1,3 +1,5 @@
-def add(a, b):
-    return a + b
-# Test comment
+import pytest
+from main import add
+
+def test_add():
+    assert add(2, 3) == 5
