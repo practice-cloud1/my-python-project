@@ -19,4 +19,5 @@ jobs:
         run: flake8 . --count --show-source --statistics
 
       - name: Run tests with pytest
-        run: pytest test/ -v
+        run: PYTHONPATH=. pytest test/ -v
+
