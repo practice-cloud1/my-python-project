@@ -1,4 +1,5 @@
 name: Python CI
+
 on: [push]
 
 jobs:
@@ -6,15 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
+
     - name: Install dependencies
       run: pip install flake8 pytest
+
     - name: Lint with flake8
       run: flake8 . --count --show-source --statistics
-    - name: Run pytest
-      run: |
-        cd /home/runner/work/my-python-project/my-python-project
-        pytest -v
+
+    - name: Run tests with pytest
+      run: pytest -v
